@@ -1,0 +1,53 @@
+<app-header title="Login"></app-header>
+
+<ion-content>
+  <div class="d-flex-center">
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()">
+      <app-input
+        autocomplete="email"
+        icon="mail-outline"
+        [control]="form.controls.email"
+        type="email"
+        label="Correo"
+      ></app-input>
+
+      <div
+        class="validators"
+        *ngIf="form.controls.email.errors && form.controls.email.touched"
+      >
+        <div *ngIf="form.controls.email.errors?.['required']">
+          Se requiere el correo
+        </div>
+        <div *ngIf="form.controls.email.errors?.['email']">
+          Ingrese un correo válido
+        </div>
+      </div>
+
+      <app-input
+        [control]="form.controls.password"
+        icon="lock-closed-outline"
+        type="password"
+        label="Contraseña"
+      ></app-input>
+
+      <div
+        class="validators"
+        *ngIf="form.controls.password.errors && form.controls.password.touched"
+      >
+        <div *ngIf="form.controls.password.errors?.['required']">
+          Se requiere una contraseña
+        </div>
+      </div>
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        class="submit"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Iniciar sesión
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
