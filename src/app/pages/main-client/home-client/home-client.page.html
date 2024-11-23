@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Biblioteca Digital</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="irAlPerfil()">Perfil</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+    placeholder="Buscar libros"
+    [(ngModel)]="searchQuery"
+    (ionInput)="buscarLibros()"
+  >
+  </ion-searchbar>
+
+  <ion-list>
+    <ion-item
+      *ngFor="let libro of librosFiltrados"
+      (click)="verDetalles(libro)"
+    >
+      <ion-label>
+        <h2>{{ libro.titulo }}</h2>
+        <p>{{ libro.autor }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="escanearCodigoQR()">
+      <ion-icon name="scan"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

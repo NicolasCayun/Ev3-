@@ -10,6 +10,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: '',
+    loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule), canActivate:[noAuthGuard]
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule), canActivate:[noAuthGuard]
   },
@@ -17,6 +21,11 @@ const routes: Routes = [
     path: 'main',
     loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule), canActivate:[authGuard]
   },
+  {
+    path: 'main-client',
+    loadChildren: () => import('./pages/main-client/main-client.module').then( m => m.MainClientPageModule)
+  },
+
 
 ];
 

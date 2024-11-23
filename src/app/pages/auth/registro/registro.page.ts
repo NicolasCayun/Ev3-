@@ -20,7 +20,7 @@ export class RegistroPage implements OnInit {
     uid: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)])
+    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
    })
 
     firebaseSvc = inject(FirebaseService);
@@ -28,69 +28,88 @@ export class RegistroPage implements OnInit {
   async submit() {
     if (this.form.valid) {
 
+      // Mostramos una pantalla de carga mientras registramos el usuario
       const loading = await this.utilsSvc.loading();
       await loading.present();
 
-      this.firebaseSvc.signUp(this.form.value as User).then(async res =>{
+      // Creamos un objeto de usuario que incluye el campo 'tipo: cliente'
+      const userData: User = {
+        uid: '',                           // Este valor lo asignamos después
+        email: this.form.value.email,      // Tomamos los valores del formulario
+        password: this.form.value.password,
+        name: this.form.value.name,
+        tipo: 'cliente'                    // Asignamos el tipo por defecto a 'cliente'
+      };
 
-        await this.firebaseSvc.updateUser(this.form.value.name)
+      // Intentamos registrar al usuario
+      this.firebaseSvc.signUp(userData).then(async res => {
+        // Actualizamos el perfil del usuario con su nombre
+        await this.firebaseSvc.updateUser(this.form.value.name);
 
         let uid = res.user.uid;
-        this.form.controls.uid.setValue(uid);
-        this.setUserInfo(uid);
+        userData.uid = uid;               // Establecemos el UID recibido de Firebase
+        this.form.controls.uid.setValue(uid);  // Establecemos el UID en el formulario
+        this.setUserInfo(uid, userData);       // Llamamos a la función para guardar los datos del usuario
 
-      }).catch(error =>{
+      }).catch(error => {
         console.log(error);
-
+        // Manejamos cualquier error que pueda ocurrir
         this.utilsSvc.presentToast({
           message: error.message,
           duration: 2500,
           color: 'primary',
           position: 'middle',
           icon: 'alert-circle-outline'
-        })
-
+        });
       }).finally(() => {
-
-      loading.dismiss();
-    })
+        // Finalizamos el loading independientemente de si se completó el registro o no
+        loading.dismiss();
+      });
+    }
   }
 
-  }
 
 
-  async setUserInfo(uid: string) {
-    if (this.form.valid) {
-
+  async setUserInfo(uid: string, userData: User) {
+    if (userData) {
       const loading = await this.utilsSvc.loading();
       await loading.present();
+
+      // Construimos la ruta en Firebase para guardar los datos del usuario
       let path = `users/${uid}`;
-      delete this.form.value.password;
 
-      this.firebaseSvc.setDocument(path, this.form.value).then(async res =>{
+      // Eliminamos el campo 'password' antes de guardarlo en la base de datos
+      delete userData.password;
 
-        this.utilsSvc.saveInLocalStorage('user', this.form.value);
-        this.utilsSvc.routerLink('/main/home');
+      // Guardamos los datos del usuario en Firebase
+      this.firebaseSvc.setDocument(path, userData).then(async res => {
+        // Guardamos los datos del usuario en localStorage
+        this.utilsSvc.saveInLocalStorage('user', userData);
+
+        // Redirigimos al usuario a la página principal (home)
+        this.utilsSvc.routerLink('/auth');
+
+        // Reiniciamos el formulario (opcional)
         this.form.reset();
 
-      }).catch(error =>{
+      }).catch(error => {
         console.log(error);
-
+        // Mostramos un mensaje de error si algo falla
         this.utilsSvc.presentToast({
           message: error.message,
           duration: 2500,
           color: 'primary',
           position: 'middle',
           icon: 'alert-circle-outline'
-        })
+        });
 
       }).finally(() => {
-
-      loading.dismiss();
-    })
+        // Finalizamos el loading
+        loading.dismiss();
+      });
+    }
   }
 
-  }
 
 
 }
