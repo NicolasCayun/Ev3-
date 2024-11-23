@@ -1,0 +1,102 @@
+<app-header  [isModal]="true" title="Agregar libro"></app-header>
+<ion-content>
+  <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+    <app-logo></app-logo>
+
+    <!---->>
+    <ion-button (click)="takeImage()" expand="block" fill="clear" shape="round">
+      Tomar o seleccionar foto
+    </ion-button>
+
+    <!-- Nombre -->
+    <app-input
+      autocomplete="name"
+      icon="library-outline"
+      [control]="form.controls.name"
+      type="text"
+      label="Nombre"
+    ></app-input>
+
+    <div
+      class="validators"
+      *ngIf="form.controls.name.errors && form.controls.name.touched"
+    >
+      <div *ngIf="form.controls.name.errors?.['required']">
+        Este campo es requerido
+      </div>
+      <div *ngIf="form.controls.name.errors?.['minlenght']">
+        El nombre debe tener al menos 4 caracteres
+      </div>
+    </div>
+    <!-- Autor -->
+    <app-input
+      autocomplete="autor"
+      icon="person-outline"
+      [control]="form.controls.autor"
+      type="text"
+      label="Autor"
+    ></app-input>
+
+    <div
+      class="validators"
+      *ngIf="form.controls.autor.errors && form.controls.autor.touched"
+    >
+      <div *ngIf="form.controls.autor.errors?.['required']">
+        Este campo es requerido
+      </div>
+      <div *ngIf="form.controls.autor.errors?.['minlenght']">
+        El nombre debe tener al menos 4 caracteres
+      </div>
+    </div>
+    <!-- Editorial -->
+    <app-input
+      autocomplete="editorial"
+      icon="document-text-outline"
+      [control]="form.controls.editorial"
+      type="text"
+      label="Editorial"
+    ></app-input>
+
+    <div
+      class="validators"
+      *ngIf="form.controls.editorial.errors && form.controls.editorial.touched"
+    >
+      <div *ngIf="form.controls.editorial.errors?.['required']">
+        Este campo es requerido
+      </div>
+      <div *ngIf="form.controls.editorial.errors?.['minlenght']">
+         Debe tener al menos 4 caracteres
+      </div>
+    </div>
+    <!-- stock -->
+    <app-input
+      icon="list-outline"
+      [control]="form.controls.stock"
+      type="number"
+      label="stock"
+    ></app-input>
+
+    <div
+      class="validators"
+      *ngIf="form.controls.stock.errors && form.controls.stock.touched"
+    >
+      <div *ngIf="form.controls.stock.errors?.['required']">
+        Este campo es requerido
+      </div>
+      <div *ngIf="form.controls.stock.errors?.['min']">
+         La cantidad minima a agregar debe ser 1
+      </div>
+    </div>
+    <ion-button
+      expand="block"
+      mode="ios"
+      class="submit"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+    Agregar Libro
+    <ion-icon slot="end" name="book-outline"></ion-icon>
+  </ion-button>
+  </form>
+</ion-content>
