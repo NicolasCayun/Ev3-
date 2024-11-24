@@ -13,6 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["some-library"],
+             "experiments": {
+               "topLevelAwait": true
+                      },
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",

@@ -72,7 +72,7 @@ async takePicture(promptLabelHeader: string){
     dismissModal(data?: any){
       return this.modalCtrl.dismiss(data);
     }
+  }
 
 
 
-}

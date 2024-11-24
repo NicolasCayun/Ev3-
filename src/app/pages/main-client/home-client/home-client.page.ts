@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { Book } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -13,31 +14,19 @@ export class HomeClientPage {
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
+
+  books: Book[] = [];
   signOut(){
     this.firebaseSvc.signOut();
   }
-  libros = [
-    { titulo: 'Cien años de soledad', autor: 'Gabriel García Márquez', genero: 'Ficción' },
-    { titulo: 'El principito', autor: 'Antoine de Saint-Exupéry', genero: 'Fábula' },
-    { titulo: '1984', autor: 'George Orwell', genero: 'Distopía' },
-    // Agrega más libros si es necesario
-  ];
 
   // Libros filtrados por la búsqueda
-  librosFiltrados = [...this.libros];
 
   // Consulta de búsqueda
   searchQuery = '';
 
   constructor(private router: Router) {}
 
-  // Método para filtrar libros por búsqueda
-  buscarLibros() {
-    const query = this.searchQuery.toLowerCase();
-    this.librosFiltrados = this.libros.filter(libro =>
-      libro.titulo.toLowerCase().includes(query) || libro.autor.toLowerCase().includes(query)
-    );
-  }
 
   // Método para ver los detalles de un libro
   verDetalles(libro: any) {
@@ -55,4 +44,18 @@ export class HomeClientPage {
   irAlPerfil() {
     this.router.navigate(['/perfil']); // Asegúrate de tener la ruta configurada correctamente
   }
+  ionViewWillEnter(){
+    this.getBooks();
+  }
+  getBooks(){
+    let path = `Book`
+    let sub = this.firebaseSvc.getCollectionData(path).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.books = res;
+        sub.unsubscribe();
+      }
+    })
+  }
 }
+
