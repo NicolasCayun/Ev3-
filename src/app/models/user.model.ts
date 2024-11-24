@@ -5,3 +5,11 @@ export interface User{
     name: string,
     tipo: string
 }
+export interface Book{
+  id: string,
+  editorial: string,
+  name: string,
+  stock: number,
+  autor: string
+}
+

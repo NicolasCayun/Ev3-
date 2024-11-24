@@ -117,3 +117,34 @@ ion-button {
         --height: 680px;
     }
 }
+/* Contenedor principal */
+.book-card {
+  background-color: #f8f9fa;   /* Fondo claro */
+  border: 1px solid #ddd;      /* Borde sutil */
+  border-radius: 10px;         /* Esquinas redondeadas */
+  padding: 15px;               /* Espaciado interno */
+  margin: 10px 0;              /* Separación entre tarjetas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  font-family: Arial, sans-serif;  /* Fuente estándar */
+}
+
+/* Título del libro */
+.book-title {
+  color: #4a4a4a;              /* Color oscuro */
+  font-size: 26px;             /* Tamaño más grande */
+  margin-bottom: 12px;         /* Espaciado debajo del título */
+  text-align: center;          /* Centrado */
+  font-weight: bold;           /* Texto en negrita */
+}
+
+/* Estilo para autor y editorial */
+.book-author, .book-editorial {
+  color: #555;                 /* Color intermedio */
+  font-size: 16px;             /* Tamaño de texto */
+  margin: 5px 0;               /* Espaciado entre líneas */
+}
+
+/* Resaltado para etiquetas */
+.book-author strong, .book-editorial strong {
+  color: #6c757d;              /* Color más oscuro para resaltar */
+}

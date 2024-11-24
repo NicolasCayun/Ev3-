@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-home-client',
@@ -8,6 +10,12 @@ import { Router } from '@angular/router';
 })
 export class HomeClientPage {
   // Lista de libros (puedes conectar a Firestore más tarde)
+
+  firebaseSvc = inject(FirebaseService);
+  utilsSvc = inject(UtilsService);
+  signOut(){
+    this.firebaseSvc.signOut();
+  }
   libros = [
     { titulo: 'Cien años de soledad', autor: 'Gabriel García Márquez', genero: 'Ficción' },
     { titulo: 'El principito', autor: 'Antoine de Saint-Exupéry', genero: 'Fábula' },

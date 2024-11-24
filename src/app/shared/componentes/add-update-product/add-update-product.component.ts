@@ -11,15 +11,10 @@ import { UtilsService } from 'src/app/services/utils.service';
 })
 export class AddUpdateProductComponent  implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
   form = new FormGroup({
     id: new FormControl(''),
     editorial: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    image: new FormControl('', [Validators.required]),
+    //image: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     autor: new FormControl('', [Validators.required, Validators.minLength(4)]),
     stock: new FormControl('', [Validators.required, Validators.min(1)])
@@ -28,23 +23,38 @@ export class AddUpdateProductComponent  implements OnInit {
     firebaseSvc = inject(FirebaseService);
     utilsSvc = inject(UtilsService);
 
+    user = {} as User;
 
-    // Tomar o seleccionar imagen
-    async takeImage(){
-      const dataUrl = (await this.utilsSvc.takePicture('Imagen del producto')).dataUrl;
-      this.form.controls.image.setValue(dataUrl);
+    ngOnInit() {
+    this.user = this.utilsSvc.getFromLocalStorage('user');
     }
+
+
+    //Tomar o seleccionar imagen
+   // async takeImage(){
+   //   const dataUrl = (await this.utilsSvc.takePicture('Imagen del producto')).dataUrl;
+    //  this.form.controls.image.setValue(dataUrl);
+   // }
   async submit() {
     if (this.form.valid) {
 
+      let path = `Book`
+
       const loading = await this.utilsSvc.loading();
       await loading.present();
+      delete this.form.value.id;
 
-      this.firebaseSvc.signUp(this.form.value as User).then(async res =>{
+      this.firebaseSvc.addDocument(path, this.form.value).then(async res =>{
 
-        await this.firebaseSvc.updateUser(this.form.value.name)
+        this.utilsSvc.dismissModal({ success: true});
 
-        let uid = res.user.uid;
+        this.utilsSvc.presentToast({
+          message: 'Libro agregado correctamente',
+          duration: 2500,
+          color: 'purple',
+          position: 'middle',
+          icon: 'check-circle-outline'
+        })
 
 
       }).catch(error =>{
