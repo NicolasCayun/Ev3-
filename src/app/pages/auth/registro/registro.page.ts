@@ -20,7 +20,7 @@ export class RegistroPage implements OnInit {
     uid: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    username: new FormControl('', [Validators.required, Validators.minLength(4)]),
    })
 
     firebaseSvc = inject(FirebaseService);
@@ -37,14 +37,14 @@ export class RegistroPage implements OnInit {
         uid: '',                           // Este valor lo asignamos después
         email: this.form.value.email,      // Tomamos los valores del formulario
         password: this.form.value.password,
-        name: this.form.value.name,
+        username: this.form.value.username,
         tipo: 'cliente'                    // Asignamos el tipo por defecto a 'cliente'
       };
 
       // Intentamos registrar al usuario
       this.firebaseSvc.signUp(userData).then(async res => {
         // Actualizamos el perfil del usuario con su nombre
-        await this.firebaseSvc.updateUser(this.form.value.name);
+        await this.firebaseSvc.updateUser(this.form.value.username);
 
         let uid = res.user.uid;
         userData.uid = uid;               // Establecemos el UID recibido de Firebase

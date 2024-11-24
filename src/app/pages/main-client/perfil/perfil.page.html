@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Datos del Usuario</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="guardarCambios()">
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input [value]="user.email" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nombre de Usuario</ion-label>
+          <ion-input formControlName="username"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input formControlName="firstName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Apellidos</ion-label>
+          <ion-input formControlName="lastName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Teléfono</ion-label>
+          <ion-input formControlName="phone"></ion-input>
+        </ion-item>
+        <ion-button expand="block" type="submit" [disabled]="form.invalid"
+          >Guardar Cambios</ion-button
+        >
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <ion-button (click)="goBack()">
+    <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+  </ion-button>
+</ion-content>

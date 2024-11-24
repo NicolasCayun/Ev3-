@@ -1,0 +1,90 @@
+/* auth.page.scss */
+
+/* Estilo para el contenido de la página */
+ion-content {
+  --background: #f5f5f5; /* Color de fondo gris claro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+/* Contenedor del formulario */
+.d-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* Estilo para el formulario de autenticación */
+.auth-form {
+  width: 90%;
+  max-width: 400px;
+  background-color: #fff; /* Fondo blanco */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo de la aplicación */
+app-logo {
+  display: block;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Estilo para los inputs personalizados */
+app-input {
+  margin-bottom: 15px;
+}
+
+/* Estilo para los mensajes de error en los inputs */
+.validators {
+  color: #ff4d4d; /* Rojo para errores */
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Estilo para el enlace de "Olvidaste tu contraseña" */
+p {
+  text-align: right;
+  font-size: 14px;
+  color: #888; /* Gris claro */
+  cursor: pointer;
+}
+
+p:hover {
+  color: #ff4d4d; /* Rojo oscuro al pasar el ratón */
+}
+
+/* Botones */
+ion-button {
+  --background: #cc3333; /* Rojo oscuro */
+  --color: #fff; /* Texto blanco */
+  --border-radius: 8px;
+}
+
+.submit {
+  --background: #cc3333; /* Rojo oscuro */
+  --color: #fff;
+  margin-top: 20px;
+}
+
+/* Botón de registro con borde */
+ion-button.ion-margin-top {
+  --background: transparent;
+  --border-color: #cc3333;
+  --color: #cc3333;
+}
+
+ion-button.ion-margin-top:hover {
+  --background: #cc3333;
+  --color: #fff;
+}
+
+/* Iconos de los botones */
+ion-icon {
+  margin-left: 10px;
+}

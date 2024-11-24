@@ -1,0 +1,13 @@
+/* header.component.scss */
+
+.center-title {
+  width: 100%;
+  text-align: center;  /* Centra el texto en su contenedor */
+  font-weight: bold;   /* Puedes ajustar esto si quieres que el título sea más destacable */
+  color: #d9534f; /* Cambia este valor con el color de tu paleta (rojo oscuro como ejemplo) */
+
+  /* Si prefieres usar Flexbox para asegurarte de que el título esté centrado, puedes usar esto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

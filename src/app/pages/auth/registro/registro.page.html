@@ -2,34 +2,36 @@
 
 <ion-content>
   <div class="d-flex-center">
-    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
-
+    <form
+      [formGroup]="form"
+      class="auth-form"
+      (ngSubmit)="submit()"
+      (keypress.enter)="submit()"
+    >
       <app-logo></app-logo>
-
 
       <!-- Nombre -->
       <app-input
         autocomplete="name"
         icon="person-outline"
-        [control]="form.controls.name"
+        [control]="form.controls.username"
         type="text"
         label="Nombre"
       ></app-input>
 
       <div
         class="validators"
-        *ngIf="form.controls.name.errors && form.controls.name.touched"
+        *ngIf="form.controls.username.errors && form.controls.username.touched"
       >
-        <div *ngIf="form.controls.name.errors?.['required']">
+        <div *ngIf="form.controls.username.errors?.['required']">
           Este campo es obligatorio
         </div>
-        <div *ngIf="form.controls.name.errors?.['minlenght']">
+        <div *ngIf="form.controls.username.errors?.['minlenght']">
           El nombre debe tener al menos 4 caracteres
         </div>
       </div>
 
-
-<!-- Mail -->
+      <!-- Mail -->
       <app-input
         autocomplete="email"
         icon="mail-outline"
@@ -50,8 +52,7 @@
         </div>
       </div>
 
-
-<!-- Contrasena -->
+      <!-- Contrasena -->
       <app-input
         [control]="form.controls.password"
         icon="lock-closed-outline"
@@ -75,10 +76,9 @@
         type="submit"
         [disabled]="form.invalid"
       >
-      Regristrarse
-      <ion-icon slot="end" name="person-add-outline"></ion-icon>
-    </ion-button>
+        Regristrarse
+        <ion-icon slot="end" name="person-add-outline"></ion-icon>
+      </ion-button>
     </form>
   </div>
 </ion-content>
-

@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content>
-
   <ion-list>
     <ion-item-sliding class="product-item" *ngFor="let b of books">
       <ion-item>
@@ -16,19 +15,21 @@
           <div class="book-card">
             <h3 class="book-title">{{b.name}}</h3>
             <p class="book-author"><strong>Autor:</strong> {{b.autor}}</p>
-            <p class="book-editorial"><strong>Editorial:</strong> {{b.editorial}}</p>
+            <p class="book-editorial">
+              <strong>Editorial:</strong> {{b.editorial}}
+            </p>
+            <p class="book-stock"><strong>Stock:</strong> {{b.stock}}</p>
           </div>
         </ion-label>
       </ion-item>
     </ion-item-sliding>
   </ion-list>
 
+  <!-- Botón para escanear código QR -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="escanearCodigoQR()">
       <ion-icon name="scan"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-button (click)="signOut()">
-    Click me
-  </ion-button>
+  <ion-button (click)="signOut()"> Cerrar sesión </ion-button>
 </ion-content>
