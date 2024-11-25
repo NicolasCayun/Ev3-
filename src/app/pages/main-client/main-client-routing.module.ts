@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'home-client',
     loadChildren: () => import('./home-client/home-client.module').then( m => m.HomeClientPageModule)
+  },  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   }
+
 
 ];
 

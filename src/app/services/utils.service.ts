@@ -13,9 +13,7 @@ export class UtilsService {
   modalCtrl = inject(ModalController);
   router = inject(Router);
 
-<<<<<<< HEAD
-
-    async Scan() {
+async Scan() {
       return await Camera.getPhoto({
         quality: 90,
         allowEditing: true,
@@ -23,9 +21,6 @@ export class UtilsService {
         source: CameraSource.Camera
       })
     }
-
-=======
->>>>>>> a2ab157dc91543ddcc4f4f28b94c47a337b3e006
 async takePicture(promptLabelHeader: string){
   return await Camera.getPhoto({
     quality: 90,
@@ -77,7 +72,7 @@ async takePicture(promptLabelHeader: string){
     dismissModal(data?: any){
       return this.modalCtrl.dismiss(data);
     }
+  }
 
 
 
-}
